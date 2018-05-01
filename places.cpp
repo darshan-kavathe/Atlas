@@ -67,10 +67,12 @@ Places::Places(istream& is, bool std_in) :
        std::string file_;
         in_>>file_;
         string line;
+        int count =0;
         std::ifstream readFile(file_);
         std::string country, city, accent_city, region,population,latitude,longitude;
         place_set.clear();
         while(getline(readFile,line))   {
+            count++;
             std::stringstream iss(line);
             getline(iss, country, ',');
             getline(iss, city, ',');
@@ -94,7 +96,7 @@ Places::Places(istream& is, bool std_in) :
 
         }
         readFile.close();
-
+        cout<<"places deleted"<<count-place_set.size()<<"\n";
         for(auto&& it:  place_set){
             this->pl_v.push_back(&it);// push_back(make_shared(&it));
             this->find_set.insert(&it);
